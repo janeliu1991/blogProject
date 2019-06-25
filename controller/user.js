@@ -2,7 +2,7 @@
 const dayjs = require("dayjs")
 
 //引入数据库模块
-const conn = require('./db')
+const conn = require('../db/index')
 
 module.exports = {
     userLogin: (req, res) => {
@@ -36,10 +36,21 @@ module.exports = {
         conn.query(sql1, [body.username, body.password], (err, result) => {
             if (err) return res.send({ status: 501, msg: "登录失败" })
             if (result.length !== 1) return res.send({ status: 502, msg: "用户名或密码错误" })
+            req.session.user = result[0]
+            req.session.islogin = true
+
             res.send({ status: 200, msg: "ok" })
-                // console.log(result);
 
         })
 
+    },
+
+    loginOut: (req, res) => {
+        req.session.destroy(function(err) {
+            res.redirect('/')
+        })
+
     }
+
+
 }

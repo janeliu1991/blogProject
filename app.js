@@ -6,6 +6,14 @@ const path = require("path")
 const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({ extended: false }))
 
+const session = require('express-session')
+    //将session挂载到服务器上，那么只要发送了请求，req上都会有req.session属性
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+}))
+
 // 设置 默认采用的模板引擎名称
 app.set('view engine', 'ejs')
     // 设置模板页面的存放路径

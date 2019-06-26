@@ -30,6 +30,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- 如果用户登录，显示注销和添加文章的组件 -->
                 <% if(islogin) { %>
                     <!-- 注销和用户名按钮组 -->
                     <div class="nav navbar-nav navbar-right navbar-form">
@@ -53,6 +54,7 @@
                             </ul>
                         </li>
                     </ul>
+                    <!-- 如果用户未登录，显示登录和注册组件，不能进行文章的添加 -->
                     <% } else {%>
 
                         <!-- 登录注册按钮组 -->

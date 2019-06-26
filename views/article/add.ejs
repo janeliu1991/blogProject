@@ -6,6 +6,7 @@
         <hr>
         <form id="form">
             <!-- 在进入文章添加页面的一瞬间，就立即把 文章的 作者Id，保存到 一个隐藏域中，防止 session 失效的问题 -->
+            <!-- ，session默认的有效时间只有20-30分钟，为了防止编辑时间过长，用户session失效，跳转到添加文章页面就用隐藏域的value值保存当前用户的id作为发表者的id -->
             <input type="hidden" name="authorId" value="<%= user.id %>">
             <div class="form-group">
                 <label>文章标题：</label>

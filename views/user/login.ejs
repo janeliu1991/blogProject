@@ -47,11 +47,13 @@
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script>
         $(function() {
+            //点击submit按钮，默认会在URL上拼接参数并跳转到请求页面
             $('#form').on('submit', function(e) {
                 // 组织表单的默认提交行为
                 e.preventDefault()
                 $.ajax({
                     url: '/login',
+                    //收集表单序列化数据
                     data: $('#form').serialize(),
                     type: 'POST',
                     dataType: 'json',

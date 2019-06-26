@@ -1,30 +1,40 @@
 <%- include('./layout/header.ejs')%>
     <h1 style="padding: 0 10px">文章列表</h1>
     <hr>
+
+    <!-- 文章列表区域 -->
     <div class="list-group" style="margin:20px">
+
+        <!-- 遍历拿到的文章数据 -->
         <% article.forEach(value=>{ %>
-            <a href="#" class="list-group-item">
+            <a href="/article/info/<%=value.id%>" class="list-group-item">
                 <%=value.title%> <span class="badge" style="background-color: #5bc0de">发表时间：<%=value.ctime%> </span><span class="badge" style="background-color: #f0ad4e">发表者：<%=value.nickname%> </span></a>
             <% })%>
 
     </div>
 
+    <!-- 分页区域 -->
     <nav aria-label="Page navigation">
         <ul class="pagination">
+            <!-- 判断当前页面是否是第一页，如果是设置鼠标禁用样式，将上一页的标签设置为span标签，同时上一页的page为1，阻止点击刷新的不良体验 -->
             <li class="<%=currentPage==1 ? 'disabled':''%>">
                 <<%=currentPage==1 ? 'span': 'a'%> href="?page=
                     <%=currentPage==1 ? 1:currentPage-1%>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                 </<%=currentPage==1 ? 'span': 'a'%>>
             </li>
+
+            <!-- 根据总页数渲染页数的标签个数 -->
             <% for(let i=1;i<=pageCount;i++) { %>
                 <li class="<%=currentPage==i ? 'active' :''%>">
+                    <!-- 点击对应的页面数a跳转，发送get请求重新渲染数据 -->
                     <a href="?page=<%=i%>">
                         <%=i %>
                     </a>
                 </li>
                 <% } %>
 
+                    <!-- 下一页的样式，page设置，同上一页的按钮一样 -->
                     <li class="<%=currentPage==pageCount ? 'disabled':''%>">
                         <<%=currentPage==pageCount ? 'span': 'a'%> href="?page=
                             <%=currentPage==pageCount ? pageCount:currentPage+1%>" aria-label="Next">
